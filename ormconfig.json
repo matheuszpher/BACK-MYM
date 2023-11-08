@@ -1,9 +1,0 @@
-{
-    "type":"postgres",
-    "url": "URL DE CONEXAO",
-    "entities": ["./src/local/das/entities/*.ts"],
-    "migrations":["./src/database/migrations/*.ts"],
-    "cli": {
-        "migrationsDir":"./src/database/migrations"
-    }
-}
