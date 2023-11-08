@@ -36,6 +36,7 @@ src/shared/container : Pasta que lida com os container do typeORM
 
 Informações adicionais sobre a arquitetura:
     Para instalar as dependencias execute yarn install
+    Para executar as migrations execute yarn typeorm migration:run
     Para rodar a API execute yarn dev
     No arquivo ormconfig.json está as configurações do typeORM
     No arquivo swagger.json  está a configuração da documentação da API
