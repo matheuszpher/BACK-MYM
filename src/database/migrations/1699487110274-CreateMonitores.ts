@@ -4,17 +4,20 @@ export class CreateMonitores1699487110274 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "professor",
+                name: "monitor",
                 columns: [
                     { name: "id", type: "uuid", isPrimary: true },
-                    { name: "token", type: "varchar" },
-                    { name: "monitoresId", type: "varchar" },
+                    { name: "tokenProfessor", type: "varchar" },
+                    { name: "IdCadeira", type: "varchar" },
+                    { name: "nota", type: "float" },
+                    { name: "totalAvaliacoes", type: "int" },
+                    { name: "badges", type: "varchar" },
                 ],
             }),
         );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("professor");
+        await queryRunner.dropTable("monitor");
     }
 }
