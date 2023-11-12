@@ -1,6 +1,7 @@
 import { hash } from "bcrypt";
 import { container, inject, injectable } from "tsyringe";
 
+import { IProfessorRepository } from "../../repositories/IProfessorRepository";
 import {
     IUserRepository,
     ICreateUser,
@@ -11,6 +12,8 @@ import { EmailSenderService } from "../../services/EmailSenderService";
 class RegisterUserUseCase {
     constructor(
         @inject("UserRepository") private userRepository: IUserRepository,
+        @inject("ProfessorRepository")
+        private professorRepository: IProfessorRepository,
     ) {}
     async execute({
         name,
@@ -31,6 +34,14 @@ class RegisterUserUseCase {
             monitor,
             professor,
         });
+        if (professor) {
+            const user = await this.userRepository.findByEmail(email);
+            await this.professorRepository.create({
+                id: user.id,
+                token: "",
+                monitoresId: "",
+            });
+        }
         const emailSenderService = container.resolve(EmailSenderService);
         emailSenderService.execute({
             email,
