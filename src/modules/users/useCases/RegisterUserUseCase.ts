@@ -1,7 +1,8 @@
 import { hash } from "bcrypt";
-import { inject, injectable } from "tsyringe";
+import { container, inject, injectable } from "tsyringe";
 
 import { IUserRepository, ICreateUser } from "../repositories/IUserRepository";
+import { EmailSenderService } from "../services/EmailSenderService";
 
 @injectable()
 class RegisterUserUseCase {
@@ -26,6 +27,11 @@ class RegisterUserUseCase {
             password: passwordHashed,
             monitor,
             professor,
+        });
+        const emailSenderService = container.resolve(EmailSenderService);
+        emailSenderService.execute({
+            email,
+            body: "<h1> Bem Vindo A Nossa Aplicação </h1>",
         });
     }
 }
