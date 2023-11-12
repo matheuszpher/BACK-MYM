@@ -1,8 +1,11 @@
 import { hash } from "bcrypt";
 import { container, inject, injectable } from "tsyringe";
 
-import { IUserRepository, ICreateUser } from "../repositories/IUserRepository";
-import { EmailSenderService } from "../services/EmailSenderService";
+import {
+    IUserRepository,
+    ICreateUser,
+} from "../../repositories/IUserRepository";
+import { EmailSenderService } from "../../services/EmailSenderService";
 
 @injectable()
 class RegisterUserUseCase {
