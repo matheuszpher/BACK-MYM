@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { RegisterUserUseCase } from "../RegisterUserUseCase";
+import { RegisterUserUseCase } from "./RegisterUserUseCase";
 
 class RegisterUserController {
     constructor() {}
