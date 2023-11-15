@@ -7,7 +7,8 @@ class RegisterUserController {
     constructor() {}
     async handle(req: Request, res: Response) {
         try {
-            const { name, email, password, monitor, professor } = req.body;
+            const { name, email, password, monitor, professor, token } =
+                req.body;
             const registerUserUseCase = container.resolve(RegisterUserUseCase);
             await registerUserUseCase.execute({
                 name,
@@ -15,10 +16,14 @@ class RegisterUserController {
                 password,
                 monitor,
                 professor,
+                token,
             });
             return res.status(201).send();
         } catch (error) {
             if (error.message === "Email is already been used") {
+                return res.status(409).send({ error: error.message });
+            }
+            if (error.message === "Token invalid") {
                 return res.status(409).send({ error: error.message });
             }
             console.log(error);

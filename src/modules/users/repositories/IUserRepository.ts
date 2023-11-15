@@ -6,6 +6,7 @@ interface ICreateUser {
     password: string;
     monitor: boolean;
     professor: boolean;
+    token: string;
 }
 
 interface IUserRepository {

@@ -31,6 +31,9 @@ class MonitorRepository implements IMonitorRepository {
             id,
             tokenProfessor,
             IdCadeira,
+            nota: 0,
+            totalAvaliacoes: 0,
+            badges: "",
         });
         await this.repository.save(monitor);
         return true;
