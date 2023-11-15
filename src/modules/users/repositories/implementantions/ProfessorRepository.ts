@@ -29,5 +29,9 @@ class ProfessorRepository implements IProfessorRepository {
         const user = await this.userRepository.findById(id);
         return user;
     }
+    async findByToken(token: string): Promise<Professor> {
+        const professor = await this.repository.findOne({ token });
+        return professor;
+    }
 }
 export { ProfessorRepository };
