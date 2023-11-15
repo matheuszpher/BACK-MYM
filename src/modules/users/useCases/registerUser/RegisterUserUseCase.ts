@@ -49,7 +49,7 @@ class RegisterUserUseCase {
         }
         if (monitor) {
             const user = await this.userRepository.findByEmail(email);
-            const monitor = this.monitorRepository.create({
+            const monitor = await this.monitorRepository.create({
                 id: user.id,
                 IdCadeira: "",
                 tokenProfessor: token,
