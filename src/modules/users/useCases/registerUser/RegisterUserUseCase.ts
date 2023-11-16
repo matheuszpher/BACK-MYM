@@ -1,5 +1,6 @@
 import { hash } from "bcrypt";
 import { container, inject, injectable } from "tsyringe";
+import { v4 as uuidv4 } from "uuid";
 
 import { IMonitorRepository } from "../../repositories/IMonitorRepository";
 import { IProfessorRepository } from "../../repositories/IProfessorRepository";
@@ -31,26 +32,18 @@ class RegisterUserUseCase {
             throw new Error("Email is already been used");
         }
         const passwordHashed = await hash(password, 10);
-        await this.userRepository.create({
-            name,
-            email,
-            password: passwordHashed,
-            monitor,
-            professor,
-            token,
-        });
+        const id = uuidv4();
+
         if (professor) {
-            const user = await this.userRepository.findByEmail(email);
             await this.professorRepository.create({
-                id: user.id,
+                id,
                 token,
                 monitoresId: "",
             });
         }
         if (monitor) {
-            const user = await this.userRepository.findByEmail(email);
             const monitor = await this.monitorRepository.create({
-                id: user.id,
+                id,
                 IdCadeira: "",
                 tokenProfessor: token,
             });
@@ -58,6 +51,17 @@ class RegisterUserUseCase {
                 throw new Error("Token invalid");
             }
         }
+
+        await this.userRepository.create({
+            id,
+            name,
+            email,
+            password: passwordHashed,
+            monitor,
+            professor,
+            token,
+        });
+
         const emailSenderService = container.resolve(EmailSenderService);
         emailSenderService.execute({
             email,

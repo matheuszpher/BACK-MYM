@@ -17,6 +17,7 @@ class UserRepository implements IUserRepository {
     }
 
     async create({
+        id,
         name,
         email,
         password,
@@ -24,6 +25,7 @@ class UserRepository implements IUserRepository {
         professor,
     }: ICreateUser): Promise<void> {
         const user = this.repository.create({
+            id,
             name,
             email,
             password,
