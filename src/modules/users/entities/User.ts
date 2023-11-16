@@ -23,6 +23,8 @@ class User {
     ultimaAulaId: string;
     @Column()
     ultimaAulaMonitor: string;
+    @Column()
+    active: boolean;
     @CreateDateColumn()
     created_at: Date;
 
