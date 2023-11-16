@@ -20,5 +20,6 @@ interface IUserRepository {
         professor,
     }: ICreateUser): Promise<void>;
     findByEmail(email: string): Promise<User>;
+    validateById(id: string): Promise<void>;
 }
 export { ICreateUser, IUserRepository };

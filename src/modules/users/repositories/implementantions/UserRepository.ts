@@ -43,5 +43,11 @@ class UserRepository implements IUserRepository {
         const user = await this.repository.findOne({ email });
         return user;
     }
+
+    async validateById(id: string): Promise<void> {
+        const user = await this.repository.findOne({ id });
+        user.active = true;
+        await this.repository.save(user);
+    }
 }
 export { UserRepository };
