@@ -10,6 +10,11 @@ interface ICreateUser {
     token: string;
 }
 
+interface IChangePassword {
+    id: string;
+    password: string;
+}
+
 interface IUserRepository {
     findById(id: string): Promise<User>;
     create({
@@ -21,5 +26,6 @@ interface IUserRepository {
     }: ICreateUser): Promise<void>;
     findByEmail(email: string): Promise<User>;
     validateById(id: string): Promise<void>;
+    changePasswordById({ id, password }: IChangePassword): Promise<void>;
 }
-export { ICreateUser, IUserRepository };
+export { ICreateUser, IUserRepository, IChangePassword };

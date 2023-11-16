@@ -2,7 +2,11 @@ import { injectable } from "tsyringe";
 import { Repository, getRepository } from "typeorm";
 
 import { User } from "../../entities/User";
-import { IUserRepository, ICreateUser } from "../IUserRepository";
+import {
+    IUserRepository,
+    ICreateUser,
+    IChangePassword,
+} from "../IUserRepository";
 
 @injectable()
 class UserRepository implements IUserRepository {
@@ -47,6 +51,11 @@ class UserRepository implements IUserRepository {
     async validateById(id: string): Promise<void> {
         const user = await this.repository.findOne({ id });
         user.active = true;
+        await this.repository.save(user);
+    }
+    async changePasswordById({ id, password }: IChangePassword): Promise<void> {
+        const user = await this.repository.findOne({ id });
+        user.password = password;
         await this.repository.save(user);
     }
 }
