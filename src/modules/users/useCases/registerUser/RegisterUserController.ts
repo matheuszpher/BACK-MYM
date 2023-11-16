@@ -5,7 +5,7 @@ import { RegisterUserUseCase } from "./RegisterUserUseCase";
 
 class RegisterUserController {
     constructor() {}
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response): Promise<Response> {
         try {
             const { name, email, password, monitor, professor, token } =
                 req.body;

@@ -5,7 +5,7 @@ import { ValidateUserUseCase } from "./ValidateUserUseCase";
 
 class ValidateUserController {
     constructor() {}
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response): Promise<Response> {
         const { id } = req.body;
         const validateUserUseCase = container.resolve(ValidateUserUseCase);
         await validateUserUseCase.execute(id);
